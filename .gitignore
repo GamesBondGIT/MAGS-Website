@@ -1,0 +1,11 @@
+# Ignore all log files, no matter what they are named
+#*.log
+
+# Ignore all environment variable files
+#*.env
+
+# Ignore a specific folder named "secrets"
+MAGS_resources/
+
+# Ignore massive dependency folders
+#node_modules/
