@@ -1,147 +1,305 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAGS Digital Services</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/media/images/MAGSIcon.png">
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800&family=Lilita+One&display=swap" rel="stylesheet">
-    <!-- FontAwesome -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:ital,wght@0,100..900;1,100..900&family=Lilita+One&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
-<body>
-    
-    <!-- Custom Emoji Cursor -->
-    <div id="emoji-cursor" class="emoji-cursor">👆</div>
 
-    <!-- The Edge Monkey -->
-    <div id="edge-monkey" class="edge-monkey right-edge interactive-element">
-        <div class="monkey-speech" id="monkey-speech">
-            <p id="monkey-text">We are the best!</p>
+<body>
+    <!-- Raining Fire Canvas Background -->
+    <canvas id="fire-canvas" class="fire-canvas"></canvas>
+
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-particles"></div>
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="assets/media/images/MAGSIcon.png" alt="MAGS" class="loading-logo-spin">
+            </div>
+            <div class="loading-text">Loading Experience</div>
+            <div class="loading-bar-container">
+                <div class="loading-bar">
+                    <div class="loading-progress" id="loading-progress"></div>
+                    <div class="loading-shimmer"></div>
+                </div>
+                <div class="loading-percentage" id="loading-percentage">0%</div>
+            </div>
         </div>
-        <!-- Simple CSS/SVG Monkey Face -->
-        <svg viewBox="0 0 100 100" class="monkey-svg" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" fill="#8B4513"/> <!-- Head -->
-            <circle cx="20" cy="40" r="15" fill="#A0522D"/> <!-- Left Ear -->
-            <circle cx="80" cy="40" r="15" fill="#A0522D"/> <!-- Right Ear -->
-            <ellipse cx="50" cy="65" rx="25" ry="20" fill="#F4A460"/> <!-- Snout -->
-            <!-- Eyes -->
-            <circle cx="35" cy="40" r="12" fill="#F4A460"/>
-            <circle cx="65" cy="40" r="12" fill="#F4A460"/>
-            <circle cx="35" cy="40" r="5" fill="#000" id="monkey-eye-left"/>
-            <circle cx="65" cy="40" r="5" fill="#000" id="monkey-eye-right"/>
-            <!-- Nose & Mouth -->
-            <circle cx="45" cy="60" r="3" fill="#000"/>
-            <circle cx="55" cy="60" r="3" fill="#000"/>
-            <path d="M 40 75 Q 50 85 60 75" stroke="#000" stroke-width="2" fill="none"/>
-        </svg>
+        <div class="loading-grid"></div>
     </div>
 
-    <!-- Header / Nav -->
+    <!-- Fixed Header -->
     <header class="header">
-        <div class="logo-container">
-            <img src="assets/media/images/MAGSIcon.png" alt="MAGS" class="logo-img-nav interactive-element">
+        <div class="header-container" id="header-container">
+            <div class="logo-container" id="nav-logo">
+                <a href="#home" class="logo">
+                    <img src="assets/media/images/MAGSIcon.png" alt="MAGS">
+                </a>
+            </div>
+
+            <!-- Navigation Menu (Collapsible) -->
+            <div class="nav-menu-wrapper" id="nav-menu-wrapper">
+                <nav class="nav-menu">
+                    <ul class="menu-list">
+                        <li class="menu-item"><a href="#about" class="menu-link">About</a></li>
+                        <li class="menu-item"><a href="#services" class="menu-link">Services</a></li>
+                        <li class="menu-item"><a href="#portfolio" class="menu-link">Portfolio</a></li>
+                        <li class="menu-item"><a href="#contact" class="menu-link icon-link" title="Contact"><i
+                                    class="fas fa-envelope"></i></a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
-        <nav class="nav">
-            <a href="#home" class="interactive-element">Home</a>
-            <a href="#services" class="interactive-element">Services</a>
-            <a href="#portfolio" class="interactive-element">Portfolio</a>
-            <a href="#contact" class="interactive-element">Contact</a>
-            <button id="theme-toggle" class="theme-btn interactive-element"><i class="fa-solid fa-moon"></i></button>
-        </nav>
     </header>
 
-    <!-- SECTION 1: HOME (Retro TV) -->
-    <section id="home" class="section-home">
-        <div class="home-content">
-            <img src="assets/media/images/MAGSIconText.png" alt="MAGS Digital Services" class="home-main-logo interactive-element">
-            <p class="home-tagline">Playful. Powerful. Pure Digital Magic.</p>
-        </div>
-        
-        <!-- Retro TV Frame -->
-        <div class="retro-tv" id="retro-tv">
-            <div class="tv-antenna left"></div>
-            <div class="tv-antenna right"></div>
-            <div class="tv-screen">
-                <video autoplay loop muted playsinline id="heroVideo">
-                    <source src="assets/media/videos/MAGSshowreel.mp4" type="video/mp4">
-                </video>
-                <div class="scanlines"></div>
+    <!-- Main Content -->
+    <main>
+
+        <!-- Home Section (Split Layout) -->
+        <section id="home" class="section home-section">
+            <div class="hero-split-container">
+
+                <!-- Left: Neon TV with Retro Stand/Antenna -->
+                <div class="hero-left">
+                    <div class="retro-tv-wrapper">
+                        <!-- Antennas -->
+                        <div class="tv-antenna tv-antenna-left"></div>
+                        <div class="tv-antenna tv-antenna-right"></div>
+
+                        <!-- Main TV Body -->
+                        <div class="neon-tv">
+                            <div class="neon-tv-screen">
+                                <video id="home-video" class="home-video-player" muted autoplay loop playsinline>
+                                    <source src="assets/media/videos/MAGSshowreel.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <!-- TV Mute Button -->
+                            <button id="tv-mute-toggle" class="tv-mute-toggle" title="Toggle Audio">
+                                <i class="fas fa-volume-mute"></i>
+                            </button>
+                        </div>
+
+                        <!-- TV Stand -->
+                        <div class="tv-stand"></div>
+                        <div class="tv-base"></div>
+                    </div>
+                </div>
+
+                <!-- Right: Banner Image -->
+                <div class="hero-right">
+                    <div class="hero-banner-container">
+                        <img src="assets/media/images/MAGSBanner.png" alt="MAGS Digital Banner" class="hero-banner-img">
+                    </div>
+                </div>
+
             </div>
-            <div class="tv-panel">
-                <div class="dial"></div>
-                <div class="dial"></div>
-                <div class="speaker">
-                    <span></span><span></span><span></span><span></span>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about-section">
+            <div class="about-container split">
+                <div class="about-left">
+                    <h2 class="about-title">Pioneering Your Digital Future.</h2>
+                    <p class="about-text">
+                        We don't just market, we <span class="highlight-pill cyan">dominate</span>. From advanced
+                        <span class="highlight-pill magenta">Digital Strategy</span> to cutting-edge
+                        <span class="highlight-pill yellow">AI Generation</span>, we engineer growth.
+                        We build <span class="highlight-pill cyan">High-End Websites</span> and blend cinematic
+                        <span class="highlight-pill blue">Video Production</span> with powerful
+                        <span class="highlight-pill yellow">App Development</span> to deliver one ultimate result ⤵
+                        <span class="impact-line">Pure Magic.</span>
+                    </p>
+                </div>
+                <div class="about-right">
+                    <img src="assets/media/images/MAGSIcon.png" alt="MAGS Icon" class="about-floating-logo">
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 2: OUR SERVICES (Horizontal Slider) -->
-    <section id="services" class="section-services">
-        <h2 class="fun-title">OUR <span>SERVICES</span></h2>
-        
-        <div class="slider-container">
-            <button class="slider-btn left interactive-element" id="slider-prev"><i class="fa-solid fa-chevron-left"></i></button>
-            <div class="slider-track-wrap">
-                <div class="slider-track" id="slider-track">
-                    <!-- Populated via JS -->
+        <!-- Services Section (Horizontal Scroll) -->
+        <section id="services" class="section services-section">
+            <div class="services-container">
+
+                <!-- Standard Section Title -->
+                <div class="services-header">
+                    <h2>OUR SERVICES</h2>
+                    <p>Scroll to explore</p>
+                </div>
+
+                <!-- Horizontal sliding track -->
+                <div class="services-scroll-wrapper">
+                    <div class="services-track" id="services-track">
+
+                        <!-- Service Tiles -->
+                        <div class="service-tile" style="--tile-color: #00E5FF;">
+                            <div class="tile-icon"><i class="fas fa-search"></i></div>
+                            <h3 class="tile-title">Digital Marketing & SEO</h3>
+                            <p class="tile-desc">Content Strategy.<br>Advanced SEO Growth.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #E6007A;">
+                            <div class="tile-icon"><i class="fas fa-hashtag"></i></div>
+                            <h3 class="tile-title">Social Media & Brand</h3>
+                            <p class="tile-desc">End-to-End Social.<br>Brand Identity Design.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #FFC107;">
+                            <div class="tile-icon"><i class="fas fa-bullhorn"></i></div>
+                            <h3 class="tile-title">Ads & Campaigns</h3>
+                            <p class="tile-desc">Political Campaigns.<br>Commercial Shoots.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #005BCA;">
+                            <div class="tile-icon"><i class="fas fa-video"></i></div>
+                            <h3 class="tile-title">Video Production</h3>
+                            <p class="tile-desc">End-to-End Content.<br>Cinematic VFX.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #00E5FF;">
+                            <div class="tile-icon"><i class="fas fa-robot"></i></div>
+                            <h3 class="tile-title">AI Generation</h3>
+                            <p class="tile-desc">AI Video & Media.<br>Voice Cloning.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #E6007A;">
+                            <div class="tile-icon"><i class="fas fa-code"></i></div>
+                            <h3 class="tile-title">App Development</h3>
+                            <p class="tile-desc">Full-Stack Dev.<br>Mobile Apps.</p>
+                        </div>
+                        <div class="service-tile" style="--tile-color: #FFC107;">
+                            <div class="tile-icon"><i class="fas fa-gamepad"></i></div>
+                            <h3 class="tile-title">Game Engines</h3>
+                            <p class="tile-desc">Unity & Unreal.<br>Virtual Production.</p>
+                        </div>
+
+                        <!-- Special Last Tile -->
+                        <div class="service-tile special-tile" style="--tile-color: #00E5FF;">
+                            <div class="tile-icon"><i class="fas fa-arrow-right"></i></div>
+                            <h3 class="tile-title">Our Work</h3>
+                            <p class="tile-desc">Explore our<br>Portfolio</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <button class="slider-btn right interactive-element" id="slider-next"><i class="fa-solid fa-chevron-right"></i></button>
-        </div>
-    </section>
+        </section>
 
-    <!-- SECTION 3: PORTFOLIO (High Density Bubbles) -->
-    <section id="portfolio" class="section-portfolio">
-        <h2 class="fun-title">OUR <span>PORTFOLIO</span></h2>
-        <div class="bubble-cloud-container" id="bubble-cloud-container">
-            <!-- Bubbles Populated via JS -->
-        </div>
-    </section>
-
-    <!-- SECTION 4: CONTACT US (Clean Frosted Glass) -->
-    <section id="contact" class="section-contact">
-        <h2 class="fun-title">CONTACT <span>US</span></h2>
-        <div class="clean-contact-container">
-            
-            <div class="clean-contact-card interactive-element">
-                <h3>VIVEKANANDA K</h3>
-                <p class="role badge-cyan">TECHNICAL HEAD</p>
-                <a href="tel:+919963812722" class="interactive-element"><i class="fa-solid fa-phone"></i> +91 9963812722</a>
-                <a href="mailto:admin.magsdigital@gmail.com" class="interactive-element"><i class="fa-solid fa-envelope"></i> Email Us</a>
+        <!-- Projects / Portfolio Section -->
+        <section id="portfolio" class="projects-section">
+            <div class="projects-container">
+                <h2 class="projects-title">PORTFOLIO</h2>
+                <div class="projects-grid" id="portfolio-masonry">
+                    <!-- Loaded dynamically via JS -->
+                </div>
             </div>
-            
-            <div class="clean-contact-card interactive-element">
-                <h3>JASHWANTH K</h3>
-                <p class="role badge-magenta">CREATIVE HEAD</p>
-                <a href="tel:+919515824889" class="interactive-element"><i class="fa-solid fa-phone"></i> +91 9515824889</a>
-                <a href="mailto:admin.magsdigital@gmail.com" class="interactive-element"><i class="fa-solid fa-envelope"></i> Email Us</a>
-            </div>
+        </section>
 
-            <div class="clean-contact-card interactive-element">
-                <h3>ASWANI Y</h3>
-                <p class="role badge-yellow">OPERATIONS</p>
-                <a href="tel:+919581599626" class="interactive-element"><i class="fa-solid fa-phone"></i> +91 9581599626</a>
-                <a href="mailto:admin.magsdigital@gmail.com" class="interactive-element"><i class="fa-solid fa-envelope"></i> Email Us</a>
+        <!-- Dynamic Divider Section -->
+        <section class="divider-section">
+            <div class="divider-wrapper">
+                <div class="divider-row">
+                    <div class="divider-bar" style="background-color: var(--color-cyan);"></div>
+                    <div class="divider-bar" style="background-color: var(--color-magenta);"></div>
+                    <div class="divider-bar" style="background-color: var(--color-yellow);"></div>
+                    <div class="divider-bar" style="background-color: var(--color-blue);"></div>
+                </div>
             </div>
-            
-        </div>
-    </section>
+        </section>
 
-    <footer class="footer">
-        <p>&copy; 2026 MAGS Digital Services. Built with 💖 and lots of 🐒.</p>
-    </footer>
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <div class="contact-container">
+                <h2 class="contact-title">Let's Ignite<br>Your Brand's Potential</h2>
+                <p class="contact-desc">Transform your vision into measurable growth with our cutting-edge strategies
+                    and technology.</p>
+
+                <div class="contact-highlight">
+                    <div class="contact-pill" style="--pill-color: var(--color-cyan);">
+                        <span class="contact-pill__icon"><i class="fas fa-user-tie"></i></span>
+                        <span class="contact-pill__text">
+                            <span class="c-name" style="color: var(--color-cyan);">VIVEKANANDA K</span>
+                            <span class="c-role" style="color: var(--color-yellow);">Tech Head</span>
+                            <span class="c-contact-links">
+                                <a href="tel:+919963812722" class="c-phone" style="color: var(--color-magenta);"><i
+                                        class="fas fa-phone"></i></a>
+                                <a href="mailto:admin.magsdigital@gmail.com" class="c-mail"
+                                    style="color: var(--color-cyan);"><i class="fas fa-envelope"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="contact-pill" style="--pill-color: var(--color-magenta);">
+                        <span class="contact-pill__icon"><i class="fas fa-palette"></i></span>
+                        <span class="contact-pill__text">
+                            <span class="c-name" style="color: var(--color-cyan);">JASHWANTH K</span>
+                            <span class="c-role" style="color: var(--color-yellow);">Creative Head</span>
+                            <span class="c-contact-links">
+                                <a href="tel:+919515824889" class="c-phone" style="color: var(--color-magenta);"><i
+                                        class="fas fa-phone"></i></a>
+                                <a href="mailto:admin.magsdigital@gmail.com" class="c-mail"
+                                    style="color: var(--color-cyan);"><i class="fas fa-envelope"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="contact-pill" style="--pill-color: var(--color-yellow);">
+                        <span class="contact-pill__icon"><i class="fas fa-cogs"></i></span>
+                        <span class="contact-pill__text">
+                            <span class="c-name" style="color: var(--color-cyan);">ASWANI Y</span>
+                            <span class="c-role" style="color: var(--color-yellow);">Operations</span>
+                            <span class="c-contact-links">
+                                <a href="tel:+919581599626" class="c-phone" style="color: var(--color-magenta);"><i
+                                        class="fas fa-phone"></i></a>
+                                <a href="mailto:admin.magsdigital@gmail.com" class="c-mail"
+                                    style="color: var(--color-cyan);"><i class="fas fa-envelope"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="contact-pill" style="--pill-color: var(--color-blue);">
+                        <span class="contact-pill__icon"><i class="fas fa-briefcase"></i></span>
+                        <span class="contact-pill__text">
+                            <span class="c-name" style="color: var(--color-cyan);">BENARJI B</span>
+                            <span class="c-role" style="color: var(--color-yellow);">Project Manager</span>
+                            <span class="c-contact-links">
+                                <a href="tel:+918106164686" class="c-phone" style="color: var(--color-magenta);"><i
+                                        class="fas fa-phone"></i></a>
+                                <a href="mailto:admin.magsdigital@gmail.com" class="c-mail"
+                                    style="color: var(--color-cyan);"><i class="fas fa-envelope"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="contact-pill" style="--pill-color: #ff5722;">
+                        <span class="contact-pill__icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="contact-pill__text">
+                            <span class="c-name" style="color: var(--color-cyan);">BUSINESS BASHA</span>
+                            <span class="c-role" style="color: var(--color-yellow);">Marketing Lead</span>
+                            <span class="c-contact-links">
+                                <a href="tel:+91900000009" class="c-phone" style="color: var(--color-magenta);"><i
+                                        class="fas fa-phone"></i></a>
+                                <a href="mailto:admin.magsdigital@gmail.com" class="c-mail"
+                                    style="color: var(--color-cyan);"><i class="fas fa-envelope"></i></a>
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Background Music -->
+    <audio id="background-music" loop>
+        <source src="assets/media/videos/MAGSshowreel.mp4" type="audio/mp4">
+    </audio>
 
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="assets/js/edgemonkey.js"></script>
-    <script src="assets/js/services.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
     <script src="assets/js/main.js"></script>
 </body>
+
 </html>
